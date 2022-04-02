@@ -14,6 +14,14 @@ app.use(express.static("public"));
 //enable form
 app.use(express.urlencoded({ extended: false }));
 
+//custom middleware
+//use middle ware when u want to do something to happen to across all routes;
+app.use(function (req, res, next) {
+  res.locals.date = new Date();
+  // go to the next middle ware, if no more, go to routes
+  next();
+});
+
 //import in the routes
 const landingRoutes = require("./routes/landing");
 const productRoutes = require("./routes/products");
